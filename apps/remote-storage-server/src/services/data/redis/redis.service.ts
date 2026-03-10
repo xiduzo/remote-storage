@@ -9,6 +9,9 @@ export class RedisService implements OnModuleInit, DataService {
   constructor() {}
 
   async onModuleInit() {
+    if (process.env.DATA_STORE === 'sqlite') {
+      return
+    }
     try {
       this.client = await createClient({
         url: process.env.REDIS_URL,
