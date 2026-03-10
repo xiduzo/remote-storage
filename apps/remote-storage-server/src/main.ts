@@ -11,7 +11,7 @@ import {
 } from './common/constants'
 
 const CORS_OPTIONS = {
-  origin: '*',
+  origin: true,
   allowedHeaders: [
     'Access-Control-Allow-Origin',
     'Origin',
