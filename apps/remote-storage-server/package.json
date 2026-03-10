@@ -1,4 +1,7 @@
 {
+  "pnpm": {
+    "onlyBuiltDependencies": ["sqlite3"]
+  },
   "name": "remote-storage-server",
   "version": "0.0.1",
   "description": "",
