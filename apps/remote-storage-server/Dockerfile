@@ -73,7 +73,8 @@ COPY --chown=node:node --from=production-build /app/node_modules /app/node_modul
 COPY --chown=node:node --from=production-build /app/dist /app/dist
 COPY --chown=node:node --from=production-build /app/certs /app/certs
 
-USER node
-
-# Start the server using the production build
-CMD ["node", "dist/main.js"]
+# Entrypoint runs as root to fix /data permissions (volume mounts are often root-owned),
+# then drops to node user. Run with cwd=/data so ./database.sqlite uses the volume.
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
